@@ -5,8 +5,8 @@ module Atila
 		  source_root File.expand_path('../templates', __FILE__)
 
 		  	def copy_friendships_files
-		        copy_file "friendship.rb", "app/models/friendship.rb"
-		        copy_file "friends_management.rb", "lib/atila/friends_management.rb"
+		        template "friendship.rb", "app/models/friendship.rb"
+		        template "friends_management.rb", "lib/atila/friends_management.rb"
 		  	end
 
 		  	def self.next_migration_number(path)
