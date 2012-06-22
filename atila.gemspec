@@ -9,7 +9,7 @@ Gem::Specification.new do |s|
   s.version     = Atila::VERSION
   s.authors     = ["Josue Quintana & Isaac Jarquin"]
   s.email       = 'josukintana@gmail.com'
-  s.homepage    = "TODO"
+  s.homepage    = "https://github.com/josukintana/atila.git"
   s.summary     = "Social gem"
   s.description = "This is a social gem"
 
