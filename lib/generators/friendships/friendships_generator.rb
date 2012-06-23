@@ -1,8 +1,16 @@
+require 'rails/generators'
+require 'rails/generators/migration'
+
 module Atila
 	module Generators
 		class FriendshipsGenerator < Rails::Generators::Base
 		  include Rails::Generators::Migration
 		  source_root File.expand_path('../templates', __FILE__)
+
+		  	# def set_application
+		  	# 	environment "config.autoload_paths += %W(#{config.root}/lib)"
+		  	# 	environment "config.autoload_paths += Dir['#{config.root}/lib/**/']"
+		  	# end
 
 		  	def copy_friendships_files
 		        template "friendship.rb", "app/models/friendship.rb"
