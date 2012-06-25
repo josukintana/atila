@@ -28,6 +28,8 @@ module Atila
 		        #Generate migrations
 		        migration_template 'migrations/create_friendships.rb', 'db/migrate/create_friendships.rb' if options.with_friendships?
 		        migration_template 'migrations/create_groups.rb', 'db/migrate/create_groups.rb' if options.with_groups?
+		        migration_template 'migrations/create_memberships.rb', 'db/migrate/create_memberships.rb' if options.with_groups?
+		        migration_template 'migrations/create_ownerships.rb', 'db/migrate/create_ownerships.rb' if options.with_groups?
 		  	end
 
 		  	def self.next_migration_number(path)
