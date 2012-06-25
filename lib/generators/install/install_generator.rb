@@ -18,6 +18,8 @@ module Atila
 		  		#Copy models
 		        template "models/friendship.rb", "app/models/friendship.rb" if options.with_friendships?
 		        template "models/group.rb", "app/models/group.rb" if options.with_groups?
+		        template "models/membership.rb", "app/models/membership.rb" if options.with_groups?
+		        template "models/ownership.rb", "app/models/ownership.rb" if options.with_groups?
 
 		        #Copy modules
 		        template "modules/friendships_management.rb", "lib/atila/friendships_management.rb" if options.with_friendships?
