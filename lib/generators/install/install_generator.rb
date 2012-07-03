@@ -74,6 +74,8 @@ module Atila
 		        	migration_template "migrations/create_ownerships.rb", "db/migrate/create_ownerships.rb"
 		    	end
 
+		    	readme "INSTALL"
+
 		  	end
 
 		  	def self.next_migration_number(path)

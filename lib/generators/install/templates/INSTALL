@@ -1,0 +1,22 @@
+
+	And now, what?
+
+	After install, you just have to...
+
+		- ...add to your aplication.rb the next lines:
+
+		  	config.autoload_paths += %W(#{config.root}/lib)
+			config.autoload_paths += Dir['#{config.root}/lib/**/']
+
+		- ...include to your User model the installed modules:
+
+			include ProfilesManagement
+			include GroupsManagement
+		  	include FriendsManagement
+		  	include FollowmentsManagement
+		  	include UsersWallManagement
+
+		- ...run the migrations.
+
+		- ...enjoy!
+
