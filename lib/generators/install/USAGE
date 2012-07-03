@@ -1,8 +1,9 @@
 Description:
-    Explain the generator
+    Provides your existing project with social capabilities. You can choice to install all available functionalities, skip any of them or just to install those modules you prefer. 
+
+    It assumes you already have a User model.
 
 Example:
-    rails generate friendships Thing
+    'rails generate atila:install --with-all'
 
-    This will create:
-        what/will/it/create
+    'rails generate atila:install --help'
