@@ -23,58 +23,62 @@ module Atila
 		  	# end
 
 		  	def install
+
+		  		unless !options.has_value?(true)
 		  		
-		  		#Installation of profiles management module
-		  		if options.with_profiles? || (options.with_all? && !options.without_profiles)
-		        	#Copy models
-		        	template "models/profile.rb", "app/models/profile.rb"
+			  		#Installation of profiles management module
+			  		if options.with_profiles? || (options.with_all? && !options.without_profiles)
+			        	#Copy models
+			        	template "models/profile.rb", "app/models/profile.rb"
 
-		        	#Copy modules
-		        	template "modules/profiles_management.rb", "lib/atila/profiles_management.rb"
+			        	#Copy modules
+			        	template "modules/profiles_management.rb", "lib/atila/profiles_management.rb"
 
-		        	#Generate migrations
-		        	migration_template "migrations/create_profiles.rb", "db/migrate/create_profiles.rb"
-		        end
+			        	#Generate migrations
+			        	migration_template "migrations/create_profiles.rb", "db/migrate/create_profiles.rb"
+			        end
 
-		        #Installation of followment management module
-		        if options.with_followment? || (options.with_all? && !options.without_followment)
-		        	#Copy models
-		        	template "models/followment.rb", "app/models/followment.rb"
+			        #Installation of followment management module
+			        if options.with_followments? || (options.with_all? && !options.without_followments)
+			        	#Copy models
+			        	template "models/followment.rb", "app/models/followment.rb"
 
-		        	#Copy modules
-		        	template "modules/followments_management.rb", "lib/atila/followments_management.rb"
+			        	#Copy modules
+			        	template "modules/followments_management.rb", "lib/atila/followments_management.rb"
 
-		        	#Generate migrations
-		        	migration_template "migrations/create_followments.rb", "db/migrate/create_followments.rb"
-		        end
+			        	#Generate migrations
+			        	migration_template "migrations/create_followments.rb", "db/migrate/create_followments.rb"
+			        end
 
-		        if options.with_friendships? || (options.with_all? && !options.without_friendships)
-		        	#Copy models
-		        	template "models/friendship.rb", "app/models/friendship.rb"
+			        if options.with_friendships? || (options.with_all? && !options.without_friendships)
+			        	#Copy models
+			        	template "models/friendship.rb", "app/models/friendship.rb"
 
-		        	#Copy modules
-		        	template "modules/friendships_management.rb", "lib/atila/friendships_management.rb"
+			        	#Copy modules
+			        	template "modules/friendships_management.rb", "lib/atila/friendships_management.rb"
 
-		        	#Generate migrations
-		        	migration_template "migrations/create_friendships.rb", "db/migrate/create_friendships.rb"
-		        end
-		        
-		        if options.with_groups? || (options.with_all? && !options.without_groups)
-		        	#Copy models
-			        template "models/group.rb", "app/models/group.rb"
-			        template "models/membership.rb", "app/models/membership.rb"
-			        template "models/ownership.rb", "app/models/ownership.rb"
+			        	#Generate migrations
+			        	migration_template "migrations/create_friendships.rb", "db/migrate/create_friendships.rb"
+			        end
+			        
+			        if options.with_groups? || (options.with_all? && !options.without_groups)
+			        	#Copy models
+				        template "models/group.rb", "app/models/group.rb"
+				        template "models/membership.rb", "app/models/membership.rb"
+				        template "models/ownership.rb", "app/models/ownership.rb"
 
-			        #Copy modules
-			        template "modules/groups_management.rb", "lib/atila/groups_management.rb"
+				        #Copy modules
+				        template "modules/groups_management.rb", "lib/atila/groups_management.rb"
 
-			        #Generate migrations
-			        migration_template "migrations/create_groups.rb", "db/migrate/create_groups.rb" 
-		        	migration_template "migrations/create_memberships.rb", "db/migrate/create_memberships.rb"
-		        	migration_template "migrations/create_ownerships.rb", "db/migrate/create_ownerships.rb"
-		    	end
+				        #Generate migrations
+				        migration_template "migrations/create_groups.rb", "db/migrate/create_groups.rb" 
+			        	migration_template "migrations/create_memberships.rb", "db/migrate/create_memberships.rb"
+			        	migration_template "migrations/create_ownerships.rb", "db/migrate/create_ownerships.rb"
+			    	end
 
-		    	readme "INSTALL"
+			    	readme "INSTALL"
+			    end
+
 
 		  	end
 
