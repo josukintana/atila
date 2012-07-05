@@ -8,7 +8,7 @@
 		  	config.autoload_paths += %W(#{config.root}/lib)
 			config.autoload_paths += Dir['#{config.root}/lib/**/']
 
-		- ...include to your User model the installed modules:
+		- ...include the installed modules in your User model:
 
 			include ProfilesManagement
 			include GroupsManagement
