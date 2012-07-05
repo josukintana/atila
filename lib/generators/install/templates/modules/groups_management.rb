@@ -11,13 +11,19 @@ module GroupsManagement
     end
     
     def add_group(name)
-      self.groups.create(:name => name) if (!group_exists?(name))
-      !group_exists?(name) ? "The group '" + name + "' has been correctly created." : "The group '" + name + "' already exists."
+      if !group_exists?(name)
+        self.groups.create(:name => name)
+      else
+        raise GroupAlreadyExists, "The group '" + name + "' already exists."
+      end
     end
     
     def remove_group(name)
-      self.groups.find_by_name(name).destroy if group_exists?(name)
-      group_exists?(name) ? "The group '" + name + "' has been correctly removed." : "The group '" + name + "' doesn't exist."
+      if group_exists?(name)
+        self.groups.find_by_name(name).destroy
+      else
+        raise GroupNotFound, "The group '" + name + "' doesn't exist."
+      end
     end
     
   end
