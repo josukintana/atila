@@ -5,6 +5,10 @@ module GroupsManagement
     base.send :initialize
   end
   
+  class GroupAlreadyExists < StandardError; end
+
+  class GroupNotFound < StandardError; end
+
   module InstanceMethods
     def group_exists?(name)
       !self.groups.find_by_name(name).nil?
