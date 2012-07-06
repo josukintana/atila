@@ -15,7 +15,7 @@ module GroupsManagement
     end
     
     def add_group(name)
-      if !group_exists?(name)
+      unless group_exists?(name)
         self.groups.create(:name => name)
       else
         raise GroupAlreadyExists, "The group '" + name + "' already exists."
@@ -23,7 +23,7 @@ module GroupsManagement
     end
     
     def remove_group(name)
-      if group_exists?(name)
+      unless !group_exists?(name)
         self.groups.find_by_name(name).destroy
       else
         raise GroupNotFound, "The group '" + name + "' doesn't exist."
