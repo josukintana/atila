@@ -4,8 +4,13 @@ module FollowmentsManagement
     base.send :extend, ClassMethods
     base.send :initialize
   end
+
+  class TheUserIsAlreadyBeingFollowed < StandardError; end
+
+  class TheUserIsNotBeingFollowed < StandardError; end
   
   module InstanceMethods
+
     def non_followers
       User.where("id != ?", self.id) - self.followers #My non_friends are all the users but me and my friends
     end
@@ -27,13 +32,19 @@ module FollowmentsManagement
     end
     
     def follow(user)
-      self.followments.create(:followed_id => user.id) if !self.is_following_to?(user)
-      !self.is_following_to?(user) ? self.email + " is now following " + user.email + "." : self.email + " is already following " + user.email + "."
+      unless self.is_following_to?(user)
+        self.followments.create(:followed_id => user.id)
+      else
+        raise TheUserIsAlreadyBeingFollowed, self.email + " is already following " + user.email + "."
+      end
     end
     
     def unfollow(user)
-      self.followments.find_by_followed_id(user.id).destroy if self.is_following_to?(user) #Only someone who is being followed can be unfollowed
-      self.is_following_to?(user) ? self.email + " has just left following " + user.email + "." : self.email + " was not following " + user.email + "."
+      unless !self.is_following_to?(user) #Only someone who is being followed can be unfollowed
+        self.followments.find_by_followed_id(user.id).destroy
+      else
+        raise TheUserIsNotBeingFollowed, self.email + " was not following " + user.email + "."
+      end
     end
   end
  
