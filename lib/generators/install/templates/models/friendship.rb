@@ -8,6 +8,8 @@ class Friendship < ActiveRecord::Base
   belongs_to :user
   belongs_to :friend, :class_name => "User", :foreign_key => "friend_id"
   
+  attr_accessible :friend_id, :status
+
   scope :requested, lambda { where('status = ?', REQUESTED) }
   scope :pending, lambda { where('status = ?', PENDING) }
   scope :accepted, lambda { where('status = ?', ACCEPTED) }
