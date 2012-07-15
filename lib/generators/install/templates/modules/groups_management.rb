@@ -6,8 +6,9 @@ module GroupsManagement
   end
   
   class GroupAlreadyExists < StandardError; end
-
   class GroupNotFound < StandardError; end
+  class UserIsAlreadyMember < StandardError; end
+  class UserIsNotMember < StandardError; end
 
   module InstanceMethods
 

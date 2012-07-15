@@ -11,18 +11,16 @@ class Group < ActiveRecord::Base
   def add_member(user)
     if (!self.members.include?(user))
       self.members << user
-      return user.email + " has been correctly added to the group '" + self.name + "'."
     else
-      return user.email + " is already a member of '" + self.name + "'."
+      raise GroupsManagement::UserIsAlreadyMember, "The user " + user.email + " is already a member of '" + self.name + "'."
     end
   end
 
   def remove_member(user)
     if (self.members.include?(user))
       self.memberships.find_by_user_id(user.id).destroy
-      #return user.email + " has been correctly removed from the group '" + self.name + "'."
     else
-      #return user.email + " is not a member of the group '" + self.name + "'."
+       raise GroupsManagement::UserIsNotMember, "The user " + user.email + " is not a member of the group '" + self.name + "'."
     end
     
   end
