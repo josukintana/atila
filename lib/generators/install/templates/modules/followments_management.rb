@@ -12,13 +12,13 @@ module FollowmentsManagement
   module InstanceMethods
 
     # Gets the users that are not following the calling user.
-    # My non_followers are all the users except the calling user and his followers.
+    # A user's non_followers are all the users except the calling user and his followers.
     def non_followers
       User.where("id != ?", self.id) - self.followers
     end
     
     # Gets the users that are not being followed by the calling user.
-    # My non_followed are all the users except the calling user and the users he is following.
+    # A user's non_followed are all the users except the calling user and the users he is following.
     def non_followed
       User.where("id != ?", self.id) - self.followed
     end
