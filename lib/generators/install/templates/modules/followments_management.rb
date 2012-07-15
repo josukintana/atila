@@ -64,6 +64,7 @@ module FollowmentsManagement
   end
  
   module ClassMethods
+    # Sets up the necessary relationships between the User model and the Followment model. 
     def initialize
       has_many :followments, :dependent => :destroy
       has_many :followings, :class_name => 'Followment', :foreign_key => 'followed_id'
