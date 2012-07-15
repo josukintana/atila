@@ -11,27 +11,38 @@ module FollowmentsManagement
   
   module InstanceMethods
 
+    # Gets the users that are not following the calling user.
+    # My non_followers are all the users except the calling user and his followers.
     def non_followers
-      User.where("id != ?", self.id) - self.followers #My non_friends are all the users but me and my friends
+      User.where("id != ?", self.id) - self.followers
     end
     
-    def non_followeds
-      User.where("id != ?", self.id) - self.followeds #My non_friends are all the users but me and my friends
+    # Gets the users that are not being followed by the calling user.
+    # My non_followed are all the users except the calling user and the users he is following.
+    def non_followed
+      User.where("id != ?", self.id) - self.followed
     end
     
+    # Determines if a user is being followed by another user.
     def is_followed_by?(user)
       self.non_followers.include?(user)
     end
     
+    # Determines if a user is following another user.
     def is_following_to?(user)
-      !self.non_followeds.include?(user)
+      !self.non_followed.include?(user)
     end
     
+    # Determines if a user is blocked by another user.
     def is_blocked_by?(friend)
       friend.blocked_friends.include?(self)
     end
     
+    # Makes the calling user to follow another user.
     def follow(user)
+      #--
+      # Only someone who is not still being followed can be followed.
+      #++
       unless self.is_following_to?(user)
         self.followments.create(:followed_id => user.id)
       else
@@ -39,8 +50,12 @@ module FollowmentsManagement
       end
     end
     
+    # Makes the calling user to unfollow another user.
     def unfollow(user)
-      unless !self.is_following_to?(user) #Only someone who is being followed can be unfollowed
+      #--
+      # Only someone who is being followed can be unfollowed.
+      #++
+      unless !self.is_following_to?(user)
         self.followments.find_by_followed_id(user.id).destroy
       else
         raise TheUserIsNotBeingFollowed, self.email + " was not following " + user.email + "."
@@ -52,7 +67,7 @@ module FollowmentsManagement
     def initialize
       has_many :followments, :dependent => :destroy
       has_many :followings, :class_name => 'Followment', :foreign_key => 'followed_id'
-      has_many :followeds, :through => :followments, :source => :followed
+      has_many :followed, :through => :followments, :source => :followed
       has_many :followers, :class_name => 'User', :through => :followings
     end
   end
