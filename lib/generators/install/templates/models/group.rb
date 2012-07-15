@@ -8,6 +8,7 @@ class Group < ActiveRecord::Base
   has_one :ownership
   has_one :owner, :through => :ownership, :source => :user
   
+  # Adds a user to a group.
   def add_member(user)
     if (!self.members.include?(user))
       self.members << user
@@ -16,6 +17,7 @@ class Group < ActiveRecord::Base
     end
   end
 
+  # Removes a user from a group.
   def remove_member(user)
     if (self.members.include?(user))
       self.memberships.find_by_user_id(user.id).destroy

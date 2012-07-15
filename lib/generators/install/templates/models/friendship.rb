@@ -16,11 +16,13 @@ class Friendship < ActiveRecord::Base
   scope :blocked, lambda { where('status = ?', BLOCKED) }
   
   scope :by_friend, lambda { |friend| where( :friend_id => friend.id)}
-          
+  
+  # Marks a friendship as accepted.
   def accept
     self.update_attributes(:status => ACCEPTED)
   end
   
+  # Marks a friendship as rejected.
   def reject
     self.update_attributes(:status => REJECTED)
   end
